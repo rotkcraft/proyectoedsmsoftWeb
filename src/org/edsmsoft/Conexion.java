@@ -30,7 +30,7 @@ public Conexion(HttpServletRequest request) {
 }
     public JSONArray traerInfo(String sql)
     {
-        JSONArray rutas=new JSONArray();
+        JSONArray info=new JSONArray();
         PreparedStatement stmt = null;
         Connection conn = null;
 
@@ -50,21 +50,21 @@ public Conexion(HttpServletRequest request) {
                     objeto.put(rd.getColumnLabel(i),rs.getString(i));
 
                 }
-                rutas.add(objeto);
+                info.add(objeto);
             }
 
             rs.close();
             stmt.close();
 
             conn.close();
-            return rutas;
+            return info;
 
         }
         catch(Exception e){
             JSONObject error=new JSONObject();
             error.put("error",e.getMessage());
-            rutas.add(error);
-            return rutas;}
+            info.add(error);
+            return info;}
 
         finally {
 
