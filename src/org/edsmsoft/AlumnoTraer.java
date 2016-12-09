@@ -88,7 +88,7 @@ public class AlumnoTraer extends HttpServlet
 //            conn.close();
 //
 //        }
-//        catch(Exception e){printWriter.print(e);}
+//        catch(Exception e){printWriter.print(e) ;}
 //
 //        finally {
 //

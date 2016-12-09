@@ -20,7 +20,7 @@ public class AlumnoInsertar extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String latitud= request.getParameter("latitud");
+        String latitud= request.getParameter("infotoda");
         String longitud= request.getParameter("longitud");
         String mac= request.getParameter("mac");
 
