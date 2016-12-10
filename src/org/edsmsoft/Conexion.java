@@ -2,6 +2,7 @@ package org.edsmsoft;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.postgresql.Driver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
@@ -88,18 +89,30 @@ public Conexion(HttpServletRequest request) {
         }
 
     }
-public void insertar(String sql)
+public int insertar(String sql)
 {
+    Connection con=null;
+    PreparedStatement ps=null;
+    ResultSet resultSet=null;
+    int id=0;
 	try
 	{
-		Connection con=DriverManager.getConnection(url, usu, clave);
-		Statement ps=con.createStatement();
-		ps.execute(sql);
-		
+        DriverManager.registerDriver(new Driver());
+        con=DriverManager.getConnection(url, usu, clave);
+		 ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		resultSet=ps.getGeneratedKeys();
+        resultSet.next();
+        id=resultSet.getInt(1);
+		resultSet.close();
+        ps.close();
+        con.close();
 	}catch(Exception ex)
 	{
+        id=0;
 		ex.printStackTrace();
 	}
+
+    return id;
 }
 
 }

@@ -1,5 +1,8 @@
 package org.edsmsoft;
 
+
+import org.json.simple.parser.JSONParser;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -20,32 +22,27 @@ public class AlumnoInsertar extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String latitud= request.getParameter("infotoda");
-        String longitud= request.getParameter("longitud");
-        String mac= request.getParameter("mac");
+        String info= request.getParameter("infotoda");
+        JSONParser jsonParser=new JSONParser();
 
         PreparedStatement stmt = null;
         Connection conn = null;
         PrintWriter printWriter=response.getWriter();
-        if(latitud!=null && longitud!=null && mac!=null)
+        if(info!=null)
         {
+            Conexion conexion=new Conexion(request);
+
             try {
-                DriverManager.registerDriver(new org.postgresql.Driver());
+
 //            try {
 //                Class.forName("com.mysql.jdbc.Driver");//Mysql Connection
 //            } catch (ClassNotFoundException ex) {
 //                System.out.println(ex);
 //            }
-                conn = DriverManager.getConnection(request.getServletContext().getInitParameter("url"),request.getServletContext().getInitParameter("usuario"),request.getServletContext().getInitParameter("clave"));
 
 
+                //String sql = "insert into alumno(mac,fecha,punto) values('"+mac.trim()+"',now(),POINT("+latitud.trim()+","+longitud.trim()+"))";
 
-
-                String sql = "insert into bitacoracliente(mac,fecha,punto) values('"+mac.trim()+"',now(),POINT("+latitud.trim()+","+longitud.trim()+"))";
-
-                stmt = conn.prepareStatement(sql);
-                stmt.executeUpdate();
-                stmt.close();
                 printWriter.print("<p>Inserto Correctamente</p>");
                 printWriter.close();
 

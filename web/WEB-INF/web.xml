@@ -41,6 +41,19 @@
         <url-pattern>/TraerAlumno</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <description>TraerGen</description>
+        <display-name>TraerGen</display-name>
+        <servlet-name>TraerGN</servlet-name>
+        <servlet-class>org.edsmsoft.TraerGN</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>TraerGN</servlet-name>
+        <url-pattern>/TraerGen</url-pattern>
+    </servlet-mapping>
+
 
 
 

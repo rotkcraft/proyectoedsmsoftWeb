@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * Created by rcraft on 11-29-16.
@@ -28,14 +26,12 @@ public class AlumnoTraer extends HttpServlet
     {
 //        String id= request.getParameter("id");
 
-        PreparedStatement stmt = null;
-        Connection conn = null;
-        response.setContentType("application/json");
+         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter=response.getWriter();
-//        Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
-//        archivo.limpiarArchivo();
-//        archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,root"));
+   //     Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
+        //   archivo.limpiarArchivo();
+        //archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,123"));
 
 
 
