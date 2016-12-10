@@ -55,7 +55,7 @@ public class AlumnoInsertar extends HttpServlet
             Conexion conexion=new Conexion(request);
            int idalumno= conexion.insertar("insert into persona(pnombre,snombre) values(\'"+objeto.get("nombre")+"'," +
                     "'"+objeto.get("apellido")+"')");
-            System.out.println("insert into persona(pnombre,snombre) values('"+objeto.get("alnombre")+"'," +
+            System.out.println("insert into persona(pnombre,snombre) values('"+objeto.get("nombre")+"'," +
                     "'"+objeto.get("apellido")+"')");
             System.out.println("idalumno = " + idalumno);
             conexion.insertar("insert into " +
