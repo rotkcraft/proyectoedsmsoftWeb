@@ -53,7 +53,7 @@ public class AlumnoInsertar extends HttpServlet
                  JSONObject objeto= (JSONObject) info.get("info");
             System.out.println(objeto.toString());
             Conexion conexion=new Conexion(request);
-           int idalumno= conexion.insertar("insert into persona(pnombre,snombre) values(\'"+objeto.get("alnombre")+"'," +
+           int idalumno= conexion.insertar("insert into persona(pnombre,snombre) values(\'"+objeto.get("nombre")+"'," +
                     "'"+objeto.get("apellido")+"')");
             System.out.println("insert into persona(pnombre,snombre) values('"+objeto.get("alnombre")+"'," +
                     "'"+objeto.get("apellido")+"')");
