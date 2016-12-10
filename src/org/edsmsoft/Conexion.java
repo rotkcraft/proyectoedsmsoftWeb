@@ -2,16 +2,9 @@ package org.edsmsoft;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.postgresql.Driver;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 /**
  * Created by rcraft on 11-29-16.
  */
@@ -94,23 +87,54 @@ public int insertar(String sql)
     Connection con=null;
     PreparedStatement ps=null;
     ResultSet resultSet=null;
-    int id=0;
+    int id=-1;
 	try
 	{
-        DriverManager.registerDriver(new Driver());
+        DriverManager.registerDriver(new org.postgresql.Driver());
+
         con=DriverManager.getConnection(url, usu, clave);
 		 ps=con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+        ps.execute();
 		resultSet=ps.getGeneratedKeys();
-        resultSet.next();
-        id=resultSet.getInt(1);
+        while(resultSet.next()) {
+            id = resultSet.getInt(1);
+        }
 		resultSet.close();
         ps.close();
         con.close();
 	}catch(Exception ex)
 	{
+        ex.printStackTrace();
+
         id=0;
-		ex.printStackTrace();
 	}
+    finally {
+
+        if(resultSet!=null)
+        {
+            try {
+                resultSet.close();
+            }catch (Exception ex){}
+            resultSet=null;
+        }
+        if (ps != null) {
+            try {
+               ps.close();
+            } catch (SQLException sqlex) {
+            }
+
+            ps = null;
+        }
+
+        if (con != null) {
+            try {
+               con.close();
+            } catch (SQLException sqlex) {
+            }
+
+            con = null;
+        }
+    }
 
     return id;
 }

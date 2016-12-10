@@ -52,17 +52,30 @@ public class AlumnoInsertar extends HttpServlet
 
                  JSONObject objeto= (JSONObject) info.get("info");
             System.out.println(objeto.toString());
+            Conexion conexion=new Conexion(request);
+           int idalumno= conexion.insertar("insert into persona(pnombre,snombre) values(\'"+objeto.get("alnombre")+"'," +
+                    "'"+objeto.get("apellido")+"')");
+            System.out.println("insert into persona(pnombre,snombre) values('"+objeto.get("alnombre")+"'," +
+                    "'"+objeto.get("apellido")+"')");
+            System.out.println("idalumno = " + idalumno);
+            conexion.insertar("insert into " +
+                    "alumno(idpersona,idgenero,idnacionalidad,identidad,fechanac) " +
+                    "values("+idalumno+"," +
+                    ""+objeto.get("genero")+","+objeto.get("nacionalidad") + "," +
+                    ""+objeto.get("identidad")+"," +
+                    "'"+objeto.get("fechanac")+"')");
+            System.out.println(objeto.toString());
 
-                for (Object ob:objeto.keySet().toArray())
-                {
-
-                    prueba.put(ob,objeto.get(ob));
-                    System.out.println(ob+" "+objeto.get(ob));
-                }
+//                for (Object ob:objeto.keySet().toArray())
+//                {
+//
+//                    prueba.put(ob,objeto.get(ob));
+//                    System.out.println(ob+" "+objeto.get(ob));
+//                }
 
 //            Conexion conexion=new Conexion(request);
 
-                printWriter.print(prueba.toString());
+//                printWriter.print(prueba.toString());
                 printWriter.close();
 
 

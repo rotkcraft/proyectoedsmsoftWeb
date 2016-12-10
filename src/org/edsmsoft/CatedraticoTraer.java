@@ -14,8 +14,8 @@ import java.io.PrintWriter;
 /**
  * Created by rcraft on 11-29-16.
  */
-@WebServlet(name = "AlumnoTraer")
-public class AlumnoTraer extends HttpServlet
+@WebServlet(name = "CatedraticoTraer")
+public class CatedraticoTraer extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
@@ -26,12 +26,12 @@ public class AlumnoTraer extends HttpServlet
     {
 //        String id= request.getParameter("id");
 
-         response.setContentType("application/json");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter=response.getWriter();
-        Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
-           archivo.limpiarArchivo();
-        archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,123"));
+        //     Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
+        //   archivo.limpiarArchivo();
+        //archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,123"));
 
 
 
@@ -48,13 +48,13 @@ public class AlumnoTraer extends HttpServlet
 //            conn = DriverManager.getConnection(request.getServletContext().getInitParameter("url"),request.getServletContext().getInitParameter("usuario"),request.getServletContext().getInitParameter("clave"));
 
 
-            String sql = "select" +
-                    " idalumno,persona.idpersona,persona.pnombre,persona.snombre,genero.tgenero,fechanac,nacionalidad.nacionalidad  " +
-                    "from alumno" +
-                    " inner join persona on alumno.idpersona=persona.idpersona " +
-                    "inner join nacionalidad on alumno.idnacionalidad=nacionalidad.idnacionalidad " +
-                    "inner join genero on alumno.idgenero=genero.idgenero;";
-                JSONArray alumnos=conexion.traerInfo(sql);
+        String sql = "select" +
+                " idalumno,persona.idpersona,persona.pnombre,persona.snombre,genero.tgenero,fechanac,nacionalidad.nacionalidad  " +
+                "from alumno" +
+                " inner join persona on alumno.idpersona=persona.idpersona " +
+                "inner join nacionalidad on alumno.idnacionalidad=nacionalidad.idnacionalidad " +
+                "inner join genero on alumno.idgenero=genero.idgenero;";
+        JSONArray alumnos=conexion.traerInfo(sql);
 //            stmt = conn.prepareStatement(sql);
 //            ResultSet rs=stmt.executeQuery();
 //            ResultSetMetaData rd=rs.getMetaData();
@@ -77,8 +77,8 @@ public class AlumnoTraer extends HttpServlet
         infoAlumno.put("Objeto","holamundo");
         infoAlumno.put("alumnos", alumnos);
 
-            printWriter.print(infoAlumno.toString());
-            printWriter.close();
+        printWriter.print(infoAlumno.toString());
+        printWriter.close();
 
 
 //            conn.close();
