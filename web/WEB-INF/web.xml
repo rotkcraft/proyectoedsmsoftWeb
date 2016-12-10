@@ -27,6 +27,19 @@
         <url-pattern>/InsertarAlumno</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <description>InsertarMaestro</description>
+        <display-name>InsertarMaestro</display-name>
+        <servlet-name>InsertarCatedratico</servlet-name>
+        <servlet-class>org.edsmsoft.InsertarCatedratico</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InsertarCatedratico</servlet-name>
+        <url-pattern>/InsertarMaestro</url-pattern>
+    </servlet-mapping>
+
+
 
     <servlet>
         <description>TraerAlumno</description>
