@@ -15,39 +15,41 @@ import java.io.PrintWriter;
  * Created by Alexander on 09/12/2016.
  */
 @WebServlet(name = "TraerGN")
-public class TraerGN extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class TraerGN extends HttpServlet
+{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String s=request.getParameter("tipo");
+        String s = request.getParameter("tipo");
 
-        JSONParser jsonParser=new JSONParser();
+        JSONParser jsonParser = new JSONParser();
 
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        PrintWriter printWriter=response.getWriter();
-        if(s!=null)
+        PrintWriter printWriter = response.getWriter();
+        if (s != null)
         {
-            JSONObject enviar=new JSONObject();
+            JSONObject enviar = new JSONObject();
 
-            Conexion conexion=new Conexion(request);
-            if(s.equals("genero"))
+            Conexion conexion = new Conexion(request);
+            if (s.equals("genero"))
             {
-                  enviar.put("generos",conexion.traerInfo("select idgenero,tgenero from genero"));
+                enviar.put("generos", conexion.traerInfo("select idgenero,tgenero from genero"));
             }
-            if(s.equals("nacionalidad"))
+            if (s.equals("nacionalidad"))
             {
 
-                enviar.put("generos",conexion.traerInfo("select idnacionalidad,nacionalidad as \"Nacionalidad\" from nacionalidad"));
+                enviar.put("generos", conexion.traerInfo("select idnacionalidad,nacionalidad as \"Nacionalidad\" from nacionalidad"));
             }
-            if(s.equals("estadocivil"))
+            if (s.equals("estadocivil"))
             {
 
-                enviar.put("generos",conexion.traerInfo("select idestadocivil,civil as \"NCivil\" from estadocivil"));
+                enviar.put("generos", conexion.traerInfo("select idestadocivil,civil as \"NCivil\" from estadocivil"));
             }
 
             printWriter.print(enviar.toString());
