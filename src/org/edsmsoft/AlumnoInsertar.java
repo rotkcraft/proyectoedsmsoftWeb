@@ -3,18 +3,15 @@ package org.edsmsoft;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 /**
  * Created by rcraft on 11-29-16.
@@ -24,85 +21,51 @@ public class AlumnoInsertar extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-       // BufferedReader bufferedReader=request.getReader();
-        String linea="";
-        JSONObject otracosa=new JSONObject();
-        StringBuffer respuesta=new StringBuffer();
+        StringBuilder sb=new StringBuilder();
+         String json;
+        BufferedReader bufferedReader = request.getReader();
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream(),"UTF-8"));;
+        try {
+//            json=bufferedReader.readLine();
+            String linea;
+            while ((linea = bufferedReader.readLine()) != null) {
+                sb.append(linea).append('\n');
+            }
+        } finally {
+            bufferedReader.close();
+        }
 
-        //while ((linea=bufferedReader.readLine())!=null){
-         //   respuesta.append(linea);
-        //}
-       // bufferedReader.close();
 
         JSONParser jsonParser=new JSONParser();
+        JSONObject info=null;
        JSONObject prueba=new JSONObject();
         try
         {
-            String in=request.getParameter("info");
-            System.out.println(in);
-            prueba=(JSONObject)jsonParser.parse(in);
+            info=(JSONObject)jsonParser.parse(sb.toString());
         }catch (Exception ex){ex.printStackTrace();}
 
-        PreparedStatement stmt = null;
-        Connection conn = null;
         PrintWriter printWriter=response.getWriter();
-        if(!respuesta.toString().isEmpty())
+        if(info!=null)
         {
-            System.out.println(respuesta);
-            try {
-                JSONObject objeto= (JSONObject) jsonParser.parse(respuesta.toString());
+            System.out.println(info.toString());
+            System.out.println("Entramos aqui");
 
-                for(Object ob:objeto.keySet())
+                 JSONObject objeto= (JSONObject) info.get("info");
+            System.out.println(objeto.toString());
+
+                for (Object ob:objeto.keySet().toArray())
                 {
+
                     prueba.put(ob,objeto.get(ob));
                     System.out.println(ob+" "+objeto.get(ob));
                 }
 
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Conexion conexion=new Conexion(request);
-
-            try {
-
-//            try {
-//                Class.forName("com.mysql.jdbc.Driver");//Mysql Connection
-//            } catch (ClassNotFoundException ex) {
-//                System.out.println(ex);
-//            }
-
-
-                //String sql = "insert into alumno(mac,fecha,punto) values('"+mac.trim()+"',now(),POINT("+latitud.trim()+","+longitud.trim()+"))";
+//            Conexion conexion=new Conexion(request);
 
                 printWriter.print(prueba.toString());
                 printWriter.close();
 
 
-                conn.close();
-
-            }
-            catch(Exception e){printWriter.print(e.getMessage()); printWriter.close();}
-
-            finally {
-
-                if (stmt != null) {
-                    try {
-                        stmt.close();
-                    } catch (SQLException sqlex) {
-                    }
-
-                    stmt = null;
-                }
-
-                if (conn != null) {
-                    try {
-                        conn.close();
-                    } catch (SQLException sqlex) {
-                    }
-
-                    conn = null;
-                }
-            }
         }
 
 
