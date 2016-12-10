@@ -74,7 +74,6 @@ public class AlumnoTraer extends HttpServlet
 
 
         JSONObject infoAlumno=new JSONObject();
-        infoAlumno.put("Objeto","holamundo");
         infoAlumno.put("alumnos", alumnos);
 
             printWriter.print(infoAlumno.toString());

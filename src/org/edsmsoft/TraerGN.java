@@ -44,6 +44,11 @@ public class TraerGN extends HttpServlet {
 
                 enviar.put("generos",conexion.traerInfo("select idnacionalidad,nacionalidad as \"Nacionalidad\" from nacionalidad"));
             }
+            if(s.equals("estadocivil"))
+            {
+
+                enviar.put("generos",conexion.traerInfo("select idestadocivil,civil as \"NCivil\" from estadocivil"));
+            }
 
             printWriter.print(enviar.toString());
             printWriter.close();
