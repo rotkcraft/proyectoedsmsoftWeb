@@ -1,7 +1,9 @@
 package org.edsmsoft;
 
 
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,14 +24,43 @@ public class AlumnoInsertar extends HttpServlet
 {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-        String info= request.getParameter("infotoda");
+       // BufferedReader bufferedReader=request.getReader();
+        String linea="";
+        JSONObject otracosa=new JSONObject();
+        StringBuffer respuesta=new StringBuffer();
+
+        //while ((linea=bufferedReader.readLine())!=null){
+         //   respuesta.append(linea);
+        //}
+       // bufferedReader.close();
+
         JSONParser jsonParser=new JSONParser();
+       JSONObject prueba=new JSONObject();
+        try
+        {
+            String in=request.getParameter("info");
+            System.out.println(in);
+            prueba=(JSONObject)jsonParser.parse(in);
+        }catch (Exception ex){ex.printStackTrace();}
 
         PreparedStatement stmt = null;
         Connection conn = null;
         PrintWriter printWriter=response.getWriter();
-        if(info!=null)
+        if(!respuesta.toString().isEmpty())
         {
+            System.out.println(respuesta);
+            try {
+                JSONObject objeto= (JSONObject) jsonParser.parse(respuesta.toString());
+
+                for(Object ob:objeto.keySet())
+                {
+                    prueba.put(ob,objeto.get(ob));
+                    System.out.println(ob+" "+objeto.get(ob));
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             Conexion conexion=new Conexion(request);
 
             try {
@@ -43,7 +74,7 @@ public class AlumnoInsertar extends HttpServlet
 
                 //String sql = "insert into alumno(mac,fecha,punto) values('"+mac.trim()+"',now(),POINT("+latitud.trim()+","+longitud.trim()+"))";
 
-                printWriter.print("<p>Inserto Correctamente</p>");
+                printWriter.print(prueba.toString());
                 printWriter.close();
 
 
