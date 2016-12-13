@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * Created by rcraft on 11-29-16.
@@ -44,7 +43,7 @@ public class AlumnoInsertar extends HttpServlet
             info=(JSONObject)jsonParser.parse(sb.toString());
         }catch (Exception ex){ex.printStackTrace();}
 
-        PrintWriter printWriter=response.getWriter();
+//        PrintWriter printWriter=response.getWriter();
         if(info!=null)
         {
             System.out.println(info.toString());
@@ -66,17 +65,7 @@ public class AlumnoInsertar extends HttpServlet
                     "'"+objeto.get("fechanac")+"')");
             System.out.println(objeto.toString());
 
-//                for (Object ob:objeto.keySet().toArray())
-//                {
-//
-//                    prueba.put(ob,objeto.get(ob));
-//                    System.out.println(ob+" "+objeto.get(ob));
-//                }
-
-//            Conexion conexion=new Conexion(request);
-
-//                printWriter.print(prueba.toString());
-                printWriter.close();
+//                printWriter.close();
 
 
         }

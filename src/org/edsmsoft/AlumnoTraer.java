@@ -29,9 +29,9 @@ public class AlumnoTraer extends HttpServlet
          response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter=response.getWriter();
-        Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
-           archivo.limpiarArchivo();
-        archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,123"));
+//        Archivo archivo=new Archivo( request.getServletContext().getRealPath("/WEB-INF/archivos/archivo.dat"));
+//           archivo.limpiarArchivo();
+//        archivo.guardar(new Encriptar().encriptar("jdbc:postgresql://localhost:5432/edsmsoft,postgres,123"));
 
 
 
