@@ -48,12 +48,7 @@ public class CatedraticoTraer extends HttpServlet
 //            conn = DriverManager.getConnection(request.getServletContext().getInitParameter("url"),request.getServletContext().getInitParameter("usuario"),request.getServletContext().getInitParameter("clave"));
 
 
-        String sql = "select" +
-                " idalumno,persona.idpersona,persona.pnombre,persona.snombre,genero.tgenero,fechanac,nacionalidad.nacionalidad  " +
-                "from alumno" +
-                " inner join persona on alumno.idpersona=persona.idpersona " +
-                "inner join nacionalidad on alumno.idnacionalidad=nacionalidad.idnacionalidad " +
-                "inner join genero on alumno.idgenero=genero.idgenero;";
+        String sql = "select  idcatedratico,persona.idpersona,persona.pnombre,persona.snombre,genero.tgenero,fechanac,catedratico.fechadeinicioexp from catedratico  inner join persona on catedratico.idpersona=persona.idpersona inner join genero on catedratico.idgenero=genero.idgenero";
         JSONArray alumnos=conexion.traerInfo(sql);
 //            stmt = conn.prepareStatement(sql);
 //            ResultSet rs=stmt.executeQuery();
@@ -74,8 +69,7 @@ public class CatedraticoTraer extends HttpServlet
 
 
         JSONObject infoAlumno=new JSONObject();
-        infoAlumno.put("Objeto","holamundo");
-        infoAlumno.put("alumnos", alumnos);
+        infoAlumno.put("catedraticos", alumnos);
 
         printWriter.print(infoAlumno.toString());
         printWriter.close();

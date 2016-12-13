@@ -139,4 +139,59 @@ public int insertar(String sql)
     return id;
 }
 
+    public String traerF(String s) {
+        Connection con=null;
+        PreparedStatement ps=null;
+        ResultSet resultSet=null;
+        String id=new String();
+        try
+        {
+            DriverManager.registerDriver(new org.postgresql.Driver());
+
+            con=DriverManager.getConnection(url, usu, clave);
+            ps=con.prepareStatement(s);
+
+            resultSet=ps.executeQuery();
+            while(resultSet.next()) {
+                id = resultSet.getString(1);
+            }
+            resultSet.close();
+            ps.close();
+            con.close();
+        }catch(Exception ex)
+        {
+            ex.printStackTrace();
+
+            id=new String("Vacio");
+        }
+        finally {
+
+            if(resultSet!=null)
+            {
+                try {
+                    resultSet.close();
+                }catch (Exception ex){}
+                resultSet=null;
+            }
+            if (ps != null) {
+                try {
+                    ps.close();
+                } catch (SQLException sqlex) {
+                }
+
+                ps = null;
+            }
+
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException sqlex) {
+                }
+
+                con = null;
+            }
+        }
+
+        return id;
+    }
 }

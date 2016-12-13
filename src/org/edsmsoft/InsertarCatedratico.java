@@ -56,12 +56,14 @@ public class InsertarCatedratico extends HttpServlet
            /* System.out.println("insert into persona(pnombre,snombre) values('"+objeto.get("alnombre")+"'," +
                     "'"+objeto.get("apellido")+"')");
             System.out.println("idalumno = " + idcatedratico);*/
+            String f=conexion.traerF("(select cast(now() as date))");
+            System.out.println(f);
             conexion.insertar("insert into " +
                     "catedratico(idpersona,idgenero,idestadocivil,fechadeinicioexp,estado,fechacreacion,fechanac) " +
                     "values("+idcatedratico+"," +
                     ""+objeto.get("genero")+","+objeto.get("estadocivil") + "," +
-                    "'"+objeto.get("fechadeinicioexp")+"'," + ","+true+
-                    ",'"+objeto.get("fechacreacion")+ "','"+objeto.get("fechanac")+"')");
+                    "'"+objeto.get("fechadeinicioexp")+"',"+true+"" +
+                    ",'"+f+"','"+objeto.get("fechanac")+"')");
             System.out.println(objeto.toString());
 
 //                for (Object ob:objeto.keySet().toArray())

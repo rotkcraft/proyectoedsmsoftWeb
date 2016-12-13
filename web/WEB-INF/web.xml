@@ -39,6 +39,19 @@
         <url-pattern>/InsertarMaestro</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <description>TraerMaestro</description>
+        <display-name>TraerMaestro</display-name>
+        <servlet-name>CatedraticoTraer</servlet-name>
+        <servlet-class>org.edsmsoft.CatedraticoTraer</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CatedraticoTraer</servlet-name>
+        <url-pattern>/TraerMaestro</url-pattern>
+    </servlet-mapping>
+
+
 
 
     <servlet>
