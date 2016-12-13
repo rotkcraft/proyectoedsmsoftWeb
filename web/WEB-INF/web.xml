@@ -61,10 +61,23 @@
         <servlet-class>org.edsmsoft.TraerGN</servlet-class>
     </servlet>
 
-
     <servlet-mapping>
         <servlet-name>TraerGN</servlet-name>
         <url-pattern>/TraerGen</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <description>Configurar</description>
+        <display-name>Configurar</display-name>
+        <servlet-name>Configurar</servlet-name>
+        <servlet-class>org.edsmsoft.Configurar</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>Configurar</servlet-name>
+        <url-pattern>/Configurar</url-pattern>
     </servlet-mapping>
 
 
